@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insight Pilot</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Plotly (for charts) -->
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+
+  <!-- PDF LIBRARY (for export) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>📊 Insight Pilot</h2>
+    </div>
+
+    <nav class="menu">
+      <a href="#">🏠 Dashboard</a>
+      <a href="#">📁 Upload Data</a>
+      <a href="#">📈 Analytics</a>
+      <a href="#">⚙️ Settings</a>
+    </nav>
+
+    <div class="status">
+      <span class="dot"></span>
+      System Online
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <h1>Welcome to Insight Pilot</h1>
+      <p>Upload, analyze, and get prediction insights instantly</p>
+    </header>
+
+    <!-- MAIN CARD -->
+    <section class="card">
+
+      <!-- UPLOAD AREA -->
+      <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" hidden />
+        <div class="upload-icon">📂</div>
+        <h3>Drag & Drop your dataset</h3>
+        <p>CSV, Excel, JSON supported</p>
+      </div>
+
+      <!-- BUTTON -->
+      <button class="btn" onclick="uploadData()">⚡ Analyze Data</button>
+
+      <!-- CHARTS SECTION -->
+      <div class="charts">
+
+        <div id="barChart"></div>
+        <div id="lineChart"></div>
+        <div id="pieChart"></div>
+        <div id="scatterChart"></div>
+        <div id="histogramChart"></div>
+        <div id="heatmapChart"></div>
+        <div id="boxPlotChart"></div>
+        <div id="treemapChart"></div>
+        <div id="waterfallChart"></div>
+        <div id="sankeyChart"></div>
+        <div id="geoMap"></div>
+
+      </div>
+
+      <!-- 🤖 AI CHAT (ADDED HERE - CORRECT PLACE) -->
+      <div class="ai-chat">
+        <h3>🤖 AI Data Assistant</h3>
+
+        <div id="chatBox" class="chat-box"></div>
+
+        <div class="chat-input">
+          <input type="text" id="chatInput" placeholder="Ask about your data..." />
+          <button onclick="askAI()">Send</button>
+        </div>
+      </div>
+
+      <!-- RESULT -->
+      <div class="result">
+        <h3>AI Insights</h3>
+        <pre id="output">Waiting for your data...</pre>
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>© 2026 Insight Pilot • Built for intelligent data analysis</p>
+      <p>Done by ABIJAR</p>
+    </footer>
+
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
