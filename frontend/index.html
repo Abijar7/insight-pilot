@@ -52,53 +52,67 @@
     <!-- TOPBAR -->
     <header class="topbar">
       <h1>Dashboard</h1>
-      <p>Upload & analyze your data</p>
+      <p>Upload & analyze your data in seconds</p>
     </header>
 
-    <!-- CARD -->
-    <section class="card">
+    <!-- ===================== -->
+    <!-- 🔷 MODERN ACTION PANEL -->
+    <!-- ===================== -->
+    <section class="action-grid">
 
-      <!-- UPLOAD -->
-      <label class="upload-box">
-        <input type="file" id="fileInput" hidden />
-        <p>📂 Tap or click to upload CSV file</p>
-      </label>
+      <!-- UPLOAD CARD -->
+      <div class="action-card upload-card">
+        <h3>📂 Upload Dataset</h3>
 
-      <!-- BUTTONS -->
-      <div class="button-group">
-        <button class="btn" onclick="uploadData()">⚡ Analyze Data</button>
-        <button class="btn" onclick="exportPDF()">📄 Export Report</button>
+        <label class="upload-box">
+          <input type="file" id="fileInput" hidden />
+          <div class="upload-content">
+            <span class="upload-icon">📁</span>
+            <p>Drag & Drop or Click to Upload CSV</p>
+            <small>Only .csv files supported</small>
+          </div>
+        </label>
       </div>
 
-      <!-- OUTPUT -->
-      <section class="result">
-        <h3>📊 AI Insights</h3>
-        <pre id="output">Waiting for data...</pre>
-      </section>
+      <!-- ACTION BUTTONS CARD -->
+      <div class="action-card">
+        <h3>⚡ Actions</h3>
 
-      <!-- CHARTS -->
-      <section class="charts">
-        <div id="lineChart"></div>
-        <div id="barChart"></div>
-        <div id="pieChart"></div>
-        <div id="scatterChart"></div>
-        <div id="histogramChart"></div>
-        <div id="boxPlotChart"></div>
-        <div id="heatmapChart"></div>
-      </section>
-
-      <!-- AI CHAT -->
-      <section class="ai-chat">
-        <h3>🤖 AI Assistant</h3>
-
-        <div id="chatBox" class="chat-box"></div>
-
-        <div class="chat-input">
-          <input type="text" id="chatInput" placeholder="Ask something..." />
-          <button onclick="askAI()">Send</button>
+        <div class="button-stack">
+          <button class="btn" onclick="uploadData()">⚡ Analyze Data</button>
+          <button class="btn" onclick="exportPDF()">📄 Export Report</button>
         </div>
-      </section>
+      </div>
 
+      <!-- INSIGHTS CARD -->
+      <div class="action-card insights-card">
+        <h3>📊 AI Insights</h3>
+        <pre id="output">Upload data to generate insights...</pre>
+      </div>
+
+    </section>
+
+    <!-- CHARTS -->
+    <section class="charts">
+      <div id="lineChart"></div>
+      <div id="barChart"></div>
+      <div id="pieChart"></div>
+      <div id="scatterChart"></div>
+      <div id="histogramChart"></div>
+      <div id="boxPlotChart"></div>
+      <div id="heatmapChart"></div>
+    </section>
+
+    <!-- AI CHAT -->
+    <section class="ai-chat">
+      <h3>🤖 AI Assistant</h3>
+
+      <div id="chatBox" class="chat-box"></div>
+
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Ask something..." />
+        <button onclick="askAI()">Send</button>
+      </div>
     </section>
 
     <!-- ===================== -->
@@ -108,11 +122,10 @@
       <div class="footer-content">
 
         <p>© 2026 Insight Pilot. All Rights Reserved.</p>
-
         <p>Designed & Developed by <b>ABIJAR</b></p>
 
         <div class="footer-links">
-          <a href="#">Privacy Policy</a>
+          <a href="#">Privacy</a>
           <a href="#">Terms</a>
           <a href="#">Support</a>
         </div>
