@@ -1,4 +1,3 @@
-
 const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
@@ -9,23 +8,30 @@ require("dotenv").config({ path: "./.env" });
 const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
 const upload = multer({ dest: "uploads/" });
 
-/// Supabase setup
+/* =========================
+   SUPABASE SETUP (FIXED)
+========================= */
 const supabase = createClient(
-   "https://fxiksanjlmcggnpgkizr.supabase.co",
-   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ4aWtzYW5qbG1jZ2ducGdraXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNTEwMDUsImV4cCI6MjA5MTcyNzAwNX0.2s1GX7okQoow2dZilBakT3YyQLqvpq5_ZjSaZX48I40"
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
 );
 
-// Test route
+/* =========================
+   TEST ROUTE
+========================= */
 app.get("/", (req, res) => {
   res.send("Server is running ✅");
 });
 
-// Upload + Analyze route
+/* =========================
+   UPLOAD + ANALYZE ROUTE
+========================= */
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     const file = req.file;
@@ -36,7 +42,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 
     const fileData = fs.readFileSync(file.path);
 
-    // Upload to Supabase
+    /* Upload to Supabase Storage */
     const { data, error } = await supabase.storage
       .from("datasets")
       .upload(`csv/${Date.now()}_${file.originalname}`, fileData);
@@ -48,13 +54,13 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 
     const fileUrl = `${process.env.SUPABASE_URL}/storage/v1/object/public/datasets/${data.path}`;
 
-    // Analyze CSV
+    /* Read CSV and analyze */
     let rows = [];
 
     fs.createReadStream(file.path)
       .pipe(csv())
       .on("data", (row) => rows.push(row))
-      .on("end", async () => {
+      .on("end", () => {
         const analysis = {
           totalRows: rows.length,
           columns: Object.keys(rows[0] || {}),
@@ -74,6 +80,11 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000 🚀");
+/* =========================
+   RENDER PORT FIX (IMPORTANT)
+========================= */
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
