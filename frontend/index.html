@@ -40,7 +40,6 @@
       <a href="#">⚙ Settings</a>
     </nav>
 
-    <!-- STATUS -->
     <div class="status">
       <p><span class="dot"></span> System Online</p>
     </div>
@@ -60,18 +59,28 @@
     <!-- ===================== -->
     <section class="action-grid">
 
-      <!-- UPLOAD CARD -->
-      <div class="action-card upload-card">
+      <!-- UPLOAD CARD (NEW MODERN DESIGN) -->
+      <div class="action-card upload-card modern-upload">
+
         <h3>📂 Upload Dataset</h3>
 
-        <label class="upload-box">
+        <label class="upload-dropzone">
           <input type="file" id="fileInput" hidden />
-          <div class="upload-content">
-            <span class="upload-icon">📁</span>
-            <p>Drag & Drop or Click to Upload CSV</p>
-            <small>Only .csv files supported</small>
+
+          <div class="upload-inner">
+
+            <div class="upload-icon-circle">
+              📁
+            </div>
+
+            <h4>Drag & Drop your CSV file</h4>
+            <p>or click to browse files</p>
+
+            <span class="upload-badge">Only .csv supported</span>
+
           </div>
         </label>
+
       </div>
 
       <!-- ACTION BUTTONS CARD -->
