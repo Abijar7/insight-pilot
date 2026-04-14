@@ -32,6 +32,12 @@ async function uploadData() {
     }
 
     dataset = data.analysis.sample;
+
+    if (!dataset.length) {
+      output.textContent = "❌ No data returned";
+      return;
+    }
+
     detectNumericColumn();
 
     output.textContent = JSON.stringify(data.analysis, null, 2);
@@ -44,11 +50,11 @@ async function uploadData() {
 }
 
 // =====================
-// 🔍 DETECT NUMERIC COLUMN
+// 🔍 DETECT NUMERIC COLUMN (FIXED)
 // =====================
 function detectNumericColumn() {
   const keys = Object.keys(dataset[0] || {});
-  numericColumn = keys.find(key => !isNaN(Number(dataset[0][key]));
+  numericColumn = keys.find(key => !isNaN(Number(dataset[0][key])));
 }
 
 // =====================
@@ -95,7 +101,7 @@ function renderAllCharts() {
     font: { color: "#e2e8f0" }
   };
 
-  // 📈 LINE
+  // 📈 LINE CHART
   Plotly.newPlot("lineChart", [
     { x, y, mode: "lines+markers", name: "Actual" },
     { x: futureX, y: prediction, mode: "lines", name: "Prediction", line: { dash: "dot" } }
@@ -106,7 +112,7 @@ function renderAllCharts() {
     yaxis: { title: numericColumn }
   }, { responsive: true });
 
-  // 📊 BAR
+  // 📊 BAR CHART
   Plotly.newPlot("barChart", [{ x, y, type: "bar" }], {
     ...layoutCommon,
     title: "Bar Chart",
@@ -198,7 +204,7 @@ function askAI() {
 }
 
 // =====================
-// 📄 EXPORT PDF WITH CHARTS
+// 📄 EXPORT PDF WITH CHARTS (FIXED)
 // =====================
 async function exportPDF() {
   const { jsPDF } = window.jspdf;
@@ -212,7 +218,7 @@ async function exportPDF() {
   const values = dataset.map(d => Number(d[numericColumn]) || 0);
   const avg = values.reduce((a,b)=>a+b,0)/values.length;
 
-  // 🧾 TEXT
+  // TEXT
   doc.setFontSize(14);
   doc.text("Insight Pilot Report", 10, 10);
 
@@ -224,8 +230,10 @@ async function exportPDF() {
   doc.text(`Average: ${avg.toFixed(2)}`, 10, 60);
 
   try {
-    // 📈 LINE IMAGE
-    const lineImg = await Plotly.toImage("lineChart", {
+    // WAIT for charts to fully render
+    await new Promise(r => setTimeout(r, 500));
+
+    const lineImg = await Plotly.toImage(document.getElementById("lineChart"), {
       format: "png",
       width: 800,
       height: 400
@@ -235,8 +243,7 @@ async function exportPDF() {
     doc.text("Trend Chart", 10, 10);
     doc.addImage(lineImg, "PNG", 10, 20, 180, 90);
 
-    // 📊 BAR IMAGE
-    const barImg = await Plotly.toImage("barChart", {
+    const barImg = await Plotly.toImage(document.getElementById("barChart"), {
       format: "png",
       width: 800,
       height: 400
@@ -247,7 +254,7 @@ async function exportPDF() {
     doc.addImage(barImg, "PNG", 10, 20, 180, 90);
 
   } catch (err) {
-    console.error(err);
+    console.error("Chart export failed:", err);
     doc.text("⚠ Chart export failed", 10, 80);
   }
 
