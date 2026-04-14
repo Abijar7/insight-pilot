@@ -82,7 +82,6 @@ async function uploadData() {
 
     detectNumericColumn();
 
-    // ✅ CLEAN OUTPUT (NO JSON)
     showInsights(data.analysis);
 
     renderAllCharts();
@@ -127,7 +126,7 @@ function predict(values, steps = 10) {
 }
 
 // =====================
-// 📊 RENDER CHARTS
+// 📊 RENDER CHARTS (FINAL FIX)
 // =====================
 function renderAllCharts() {
   if (!dataset.length || !numericColumn) return;
@@ -144,7 +143,12 @@ function renderAllCharts() {
     font: { color: "#e2e8f0" }
   };
 
-  // 📈 LINE CHART
+  const config = {
+    responsive: true,
+    displayModeBar: false // ✅ REQUIRED FIX
+  };
+
+  // 📈 LINE
   Plotly.newPlot("lineChart", [
     { x, y, mode: "lines+markers", name: "Actual" },
     { x: futureX, y: prediction, mode: "lines", name: "Prediction", line: { dash: "dot" } }
@@ -153,15 +157,17 @@ function renderAllCharts() {
     title: "Trend & Prediction",
     xaxis: { title: "Index / Time" },
     yaxis: { title: numericColumn }
-  }, { responsive: true });
+  }, config);
 
   // 📊 BAR
-  Plotly.newPlot("barChart", [{ x, y, type: "bar" }], {
+  Plotly.newPlot("barChart", [
+    { x, y, type: "bar" }
+  ], {
     ...layoutCommon,
     title: "Bar Chart",
     xaxis: { title: "Index" },
     yaxis: { title: numericColumn }
-  }, { responsive: true });
+  }, config);
 
   // 🥧 PIE
   Plotly.newPlot("pieChart", [{
@@ -171,7 +177,7 @@ function renderAllCharts() {
   }], {
     ...layoutCommon,
     title: "Pie Chart"
-  }, { responsive: true });
+  }, config);
 
   // 📍 SCATTER
   Plotly.newPlot("scatterChart", [{
@@ -181,34 +187,42 @@ function renderAllCharts() {
     title: "Scatter Plot",
     xaxis: { title: "Index" },
     yaxis: { title: numericColumn }
-  }, { responsive: true });
+  }, config);
 
   // 📉 HISTOGRAM
   Plotly.newPlot("histogramChart", [{
-    x: y, type: "histogram"
+    x: y,
+    type: "histogram"
   }], {
     ...layoutCommon,
     title: "Distribution",
     xaxis: { title: numericColumn },
     yaxis: { title: "Frequency" }
-  }, { responsive: true });
+  }, config);
 
   // 📦 BOX
   Plotly.newPlot("boxPlotChart", [{
-    y, type: "box"
+    y,
+    type: "box"
   }], {
     ...layoutCommon,
     title: "Box Plot",
     yaxis: { title: numericColumn }
-  }, { responsive: true });
+  }, config);
 
   // 🌡 HEATMAP
   Plotly.newPlot("heatmapChart", [{
-    z: [y, y], type: "heatmap"
+    z: [y, y],
+    type: "heatmap"
   }], {
     ...layoutCommon,
     title: "Heatmap"
-  }, { responsive: true });
+  }, config);
+
+  // ✅ STEP 4: FORCE RESIZE FIX (VERY IMPORTANT)
+  setTimeout(() => {
+    window.dispatchEvent(new Event("resize"));
+  }, 300);
 }
 
 // =====================
@@ -284,18 +298,8 @@ async function exportPDF() {
     doc.text("Trend Chart", 10, 10);
     doc.addImage(lineImg, "PNG", 10, 20, 180, 90);
 
-    const barImg = await Plotly.toImage(document.getElementById("barChart"), {
-      format: "png",
-      width: 800,
-      height: 400
-    });
-
-    doc.addPage();
-    doc.text("Bar Chart", 10, 10);
-    doc.addImage(barImg, "PNG", 10, 20, 180, 90);
-
   } catch (err) {
-    console.error("Chart export failed:", err);
+    console.error(err);
     doc.text("⚠ Chart export failed", 10, 80);
   }
 

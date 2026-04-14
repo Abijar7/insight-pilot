@@ -1,4 +1,4 @@
-:root {
+:root { 
   --bg: #0a0f1c;
   --panel: rgba(255, 255, 255, 0.05);
   --border: rgba(255, 255, 255, 0.1);
@@ -150,38 +150,37 @@ body {
 }
 
 /* ========================= */
-/* 📊 CHARTS (FINAL FIX) */
+/* 📊 CHARTS (FINAL STABLE FIX) */
 /* ========================= */
 
 .charts {
   margin-top: 25px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
 }
 
-/* 🔥 IMPORTANT: chart container */
+/* 🔥 ONE CLEAN CHART CONTAINER (NO DUPLICATES) */
 .charts div {
   width: 100%;
-  height: 380px;
-  min-height: 320px;
+  height: 360px;
 
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
-  padding: 10px;
 
   overflow: hidden;
+  position: relative;
 
   transition: 0.3s;
 }
 
 .charts div:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   border-color: rgba(56,189,248,0.4);
 }
 
-/* 🔥 FIX: Plotly scaling (VERY IMPORTANT) */
+/* 🔥 CRITICAL: FIX PLOTLY (NO DISTORTION) */
 .js-plotly-plot,
 .plot-container {
   width: 100% !important;
@@ -235,10 +234,6 @@ body {
 /* 📄 RESULT */
 /* ========================= */
 
-.result {
-  margin-top: 20px;
-}
-
 pre {
   background: #0f172a;
   padding: 15px;
@@ -281,7 +276,7 @@ body::after {
 }
 
 /* ========================= */
-/* 📱 MOBILE (IMPROVED) */
+/* 📱 MOBILE (CLEAN + MODERN) */
 /* ========================= */
 
 .mobile-header {
@@ -294,12 +289,10 @@ body::after {
     flex-direction: column;
   }
 
-  /* 🔥 hide sidebar */
   .sidebar {
     display: none;
   }
 
-  /* 🔝 mobile header */
   .mobile-header {
     display: flex;
     position: sticky;
