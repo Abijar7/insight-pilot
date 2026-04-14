@@ -3,119 +3,103 @@
 <head>
   <meta charset="UTF-8">
 
-  <!-- ✅ High DPI + Mobile FIX -->
+  <!-- ✅ MOBILE OPTIMIZATION -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Insight Pilot</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Plotly -->
-  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js" defer></script>
 
   <!-- jsPDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 </head>
 
 <body>
+
+<!-- 📱 MOBILE HEADER -->
+<header class="mobile-header">
+  <h2>📊 Insight Pilot</h2>
+</header>
 
 <div class="layout">
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="logo">
-      <h2>📊 Insight Pilot</h2>
-    </div>
+    <h2>📊 Insight Pilot</h2>
 
-    <nav class="menu">
+    <nav>
       <a href="#">🏠 Dashboard</a>
-      <a href="#">📁 Upload Data</a>
+      <a href="#">📁 Upload</a>
       <a href="#">📈 Analytics</a>
-      <a href="#">⚙️ Settings</a>
     </nav>
-
-    <div class="status">
-      <span class="dot"></span>
-      System Online
-    </div>
   </aside>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <main class="main">
 
-    <!-- TOP BAR -->
+    <!-- TOPBAR -->
     <header class="topbar">
-      <h1>Welcome to Insight Pilot</h1>
-      <p>Upload, analyze, and get prediction insights instantly</p>
+      <h1>Dashboard</h1>
+      <p>Upload & analyze your data</p>
     </header>
 
-    <!-- MAIN CARD -->
+    <!-- CARD -->
     <section class="card">
 
-      <!-- UPLOAD AREA -->
-      <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+      <!-- UPLOAD -->
+      <label class="upload-box">
         <input type="file" id="fileInput" hidden />
-        <div class="upload-icon">📂</div>
-        <h3>Drag & Drop your dataset</h3>
-        <p>CSV, Excel, JSON supported</p>
+        <p>📂 Tap or click to upload CSV</p>
+      </label>
+
+      <!-- BUTTON GROUP -->
+      <div class="button-group">
+        <button class="btn" onclick="uploadData()">⚡ Analyze Data</button>
+        <button class="btn" onclick="exportPDF()">📄 Export Report</button>
       </div>
 
-      <!-- BUTTONS -->
-      <button class="btn" onclick="uploadData()">⚡ Analyze Data</button>
-      <button class="btn" onclick="exportPDF()">📄 Export Report</button>
+      <!-- OUTPUT -->
+      <section class="result">
+        <h3>📊 AI Insights</h3>
+        <pre id="output">Waiting for data...</pre>
+      </section>
 
       <!-- CHARTS -->
-      <div class="charts">
-        <div id="barChart"></div>
+      <section class="charts">
         <div id="lineChart"></div>
+        <div id="barChart"></div>
         <div id="pieChart"></div>
         <div id="scatterChart"></div>
         <div id="histogramChart"></div>
-        <div id="heatmapChart"></div>
         <div id="boxPlotChart"></div>
-        <div id="treemapChart"></div>
-        <div id="waterfallChart"></div>
-        <div id="sankeyChart"></div>
-        <div id="geoMap"></div>
-      </div>
+        <div id="heatmapChart"></div>
+      </section>
 
-      <!-- 🤖 AI CHAT -->
-      <div class="ai-chat">
-        <h3>🤖 AI Data Assistant</h3>
+      <!-- AI CHAT -->
+      <section class="ai-chat">
+        <h3>🤖 AI Assistant</h3>
 
         <div id="chatBox" class="chat-box"></div>
 
         <div class="chat-input">
-          <input type="text" id="chatInput" placeholder="Ask about your data..." />
+          <input type="text" id="chatInput" placeholder="Ask something..." />
           <button onclick="askAI()">Send</button>
         </div>
-      </div>
-
-      <!-- RESULT -->
-      <div class="result">
-        <h3>AI Insights</h3>
-        <pre id="output">Waiting for your data...</pre>
-      </div>
+      </section>
 
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>© 2026 Insight Pilot • Built for intelligent data analysis</p>
-      <p>Done by ABIJAR</p>
-    </footer>
-
   </main>
-
 </div>
 
-<!-- JS -->
-<script src="script.js"></script>
+<!-- SCRIPT -->
+<script src="script.js" defer></script>
 
 </body>
 </html>
