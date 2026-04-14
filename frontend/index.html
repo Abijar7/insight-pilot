@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- ✅ High DPI + Mobile FIX -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Insight Pilot</title>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Plotly (for charts) -->
+  <!-- Plotly -->
   <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
 
-  <!-- PDF LIBRARY (for export) -->
+  <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
 
 <body>
@@ -60,12 +65,12 @@
         <p>CSV, Excel, JSON supported</p>
       </div>
 
-      <!-- BUTTON -->
+      <!-- BUTTONS -->
       <button class="btn" onclick="uploadData()">⚡ Analyze Data</button>
+      <button class="btn" onclick="exportPDF()">📄 Export Report</button>
 
-      <!-- CHARTS SECTION -->
+      <!-- CHARTS -->
       <div class="charts">
-
         <div id="barChart"></div>
         <div id="lineChart"></div>
         <div id="pieChart"></div>
@@ -77,10 +82,9 @@
         <div id="waterfallChart"></div>
         <div id="sankeyChart"></div>
         <div id="geoMap"></div>
-
       </div>
 
-      <!-- 🤖 AI CHAT (ADDED HERE - CORRECT PLACE) -->
+      <!-- 🤖 AI CHAT -->
       <div class="ai-chat">
         <h3>🤖 AI Data Assistant</h3>
 
@@ -110,6 +114,8 @@
 
 </div>
 
+<!-- JS -->
 <script src="script.js"></script>
+
 </body>
 </html>

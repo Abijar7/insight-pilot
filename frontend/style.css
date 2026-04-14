@@ -316,3 +316,30 @@ body::after {
     grid-template-columns: 1fr;
   }
 }
+/* 🔥 FIX BLURRY CHARTS */
+.charts div {
+  height: 400px;
+  width: 100%;
+}
+
+/* Ensure canvas sharpness */
+canvas {
+  image-rendering: optimizeQuality;
+}
+
+/* Smooth animations */
+.charts div {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.charts div:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* 📱 Mobile fix */
+@media (max-width: 768px) {
+  .charts div {
+    height: 300px;
+  }
+}
