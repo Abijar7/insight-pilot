@@ -1,4 +1,3 @@
-
 :root {
   --bg: #0a0f1c;
   --panel: rgba(255, 255, 255, 0.05);
@@ -9,6 +8,10 @@
   --accent: #6366f1;
   --success: #22c55e;
 }
+
+/* ========================= */
+/* 🌍 BASE */
+/* ========================= */
 
 body {
   margin: 0;
@@ -22,17 +25,23 @@ body {
   overflow-x: hidden;
 }
 
-/* LAYOUT */
+/* ========================= */
+/* 📐 LAYOUT */
+/* ========================= */
+
 .layout {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-/* SIDEBAR */
+/* ========================= */
+/* 📚 SIDEBAR */
+/* ========================= */
+
 .sidebar {
   width: 260px;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(18px);
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
   border-right: 1px solid var(--border);
   padding: 20px;
 }
@@ -75,60 +84,67 @@ body {
   margin-right: 6px;
 }
 
-/* MAIN */
+/* ========================= */
+/* 🖥 MAIN */
+/* ========================= */
+
 .main {
   flex: 1;
   padding: 30px;
 }
 
-/* TOPBAR */
+/* ========================= */
+/* 🔝 TOPBAR */
+/* ========================= */
+
 .topbar h1 {
   margin: 0;
   font-size: 30px;
-  letter-spacing: 0.5px;
 }
 
 .topbar p {
   color: var(--muted);
-  margin-top: 5px;
 }
 
-/* CARD */
+/* ========================= */
+/* 📦 CARD */
+/* ========================= */
+
 .card {
   margin-top: 25px;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 25px;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
 }
 
-/* UPLOAD BOX */
+/* ========================= */
+/* 📂 UPLOAD */
+/* ========================= */
+
 .upload-box {
   border: 2px dashed rgba(148,163,184,0.4);
-  padding: 45px;
+  padding: 40px;
   text-align: center;
   border-radius: 14px;
   cursor: pointer;
   transition: 0.3s;
-  background: rgba(255,255,255,0.02);
 }
 
 .upload-box:hover {
   border-color: var(--primary);
   background: rgba(56,189,248,0.08);
-  transform: scale(1.01);
+  transform: scale(1.02);
 }
 
-.icon {
-  font-size: 42px;
-  margin-bottom: 10px;
-}
+/* ========================= */
+/* 🔘 BUTTON */
+/* ========================= */
 
-/* BUTTON */
 .btn {
-  margin-top: 18px;
+  margin-top: 15px;
   width: 100%;
   padding: 14px;
   border: none;
@@ -138,7 +154,6 @@ body {
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
-  font-weight: 500;
 }
 
 .btn:hover {
@@ -146,22 +161,49 @@ body {
   box-shadow: 0 0 20px rgba(56,189,248,0.4);
 }
 
-/* RESULT */
-.result {
-  margin-top: 22px;
+/* ========================= */
+/* 📊 CHARTS (FIXED) */
+/* ========================= */
+
+.charts {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
 }
 
-pre {
-  background: #0f172a;
-  padding: 15px;
-  border-radius: 12px;
-  color: #38bdf8;
-  overflow-x: auto;
+.charts div {
+  width: 100%;
+  height: 400px;
+  min-height: 350px;
+
+  background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  transition: 0.3s;
+}
+
+.charts div:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgba(56,189,248,0.4);
+}
+
+/* Plotly fix */
+.js-plotly-plot, .plot-container {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* ========================= */
-/* 🤖 AI CHAT (ADDED HERE) */
+/* 🤖 AI CHAT */
 /* ========================= */
 
 .ai-chat {
@@ -198,87 +240,71 @@ pre {
   padding: 10px 15px;
   border: none;
   border-radius: 8px;
-  background: #38bdf8;
-  cursor: pointer;
+  background: var(--primary);
   color: white;
-  font-weight: 500;
+  cursor: pointer;
 }
 
-/* ANIMATION GLOW BACKGROUND */
-body::before {
-  content: "";
-  position: fixed;
-  width: 500px;
-  height: 500px;
-  background: rgba(56,189,248,0.15);
-  filter: blur(140px);
-  top: -100px;
-  left: -100px;
-  z-index: 0;
+/* ========================= */
+/* 📄 RESULT */
+/* ========================= */
+
+.result {
+  margin-top: 20px;
 }
 
+pre {
+  background: #0f172a;
+  padding: 15px;
+  border-radius: 12px;
+  color: #38bdf8;
+  overflow-x: auto;
+}
+
+/* ========================= */
+/* ✨ BACKGROUND GLOW */
+/* ========================= */
+
+body::before,
 body::after {
   content: "";
   position: fixed;
-  width: 500px;
-  height: 500px;
-  background: rgba(99,102,241,0.12);
-  filter: blur(140px);
-  bottom: -120px;
-  right: -120px;
+  width: 400px;
+  height: 400px;
+  filter: blur(120px);
   z-index: 0;
 }
 
-/* KEEP UI ABOVE BACKGROUND */
+body::before {
+  background: rgba(56,189,248,0.15);
+  top: -100px;
+  left: -100px;
+}
+
+body::after {
+  background: rgba(99,102,241,0.12);
+  bottom: -100px;
+  right: -100px;
+}
+
+/* Keep UI above */
 .layout, .main, .sidebar {
   position: relative;
   z-index: 1;
 }
 
 /* ========================= */
-/* 📊 CHARTS GRID */
-/* ========================= */
-
-.charts {
-  margin-top: 25px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-/* Each chart box */
-.charts div {
-  height: 350px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  padding: 10px;
-  backdrop-filter: blur(10px);
-}
-
-/* ========================= */
-/* 📱 MOBILE RESPONSIVE */
+/* 📱 MOBILE */
 /* ========================= */
 
 @media (max-width: 768px) {
 
   .layout {
     flex-direction: column;
-    height: auto;
   }
 
   .sidebar {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .sidebar a {
-    width: 90%;
     text-align: center;
   }
 
@@ -291,54 +317,10 @@ body::after {
     text-align: center;
   }
 
-  .topbar p {
-    text-align: center;
-  }
-
-  .card {
-    padding: 15px;
-  }
-
-  .upload-box {
-    padding: 25px;
-  }
-
-  .btn {
-    font-size: 14px;
-    padding: 12px;
-  }
-
-  pre {
-    font-size: 12px;
-  }
-
   .charts {
     grid-template-columns: 1fr;
   }
-}
-/* 🔥 FIX BLURRY CHARTS */
-.charts div {
-  height: 400px;
-  width: 100%;
-}
 
-/* Ensure canvas sharpness */
-canvas {
-  image-rendering: optimizeQuality;
-}
-
-/* Smooth animations */
-.charts div {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.charts div:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-/* 📱 Mobile fix */
-@media (max-width: 768px) {
   .charts div {
     height: 300px;
   }
