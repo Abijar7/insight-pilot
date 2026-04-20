@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- ✅ MOBILE OPTIMIZATION -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Insight Pilot</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js" defer></script>
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+</head>
+
+<body>
+
+<!-- 📱 MOBILE HEADER -->
+<header class="mobile-header">
+  <h2>📊 Insight Pilot</h2>
+</header>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>📊 Insight Pilot</h2>
+
+    <nav>
+      <a href="#">🏠 Dashboard</a>
+      <a href="#">📁 Upload</a>
+      <a href="#">📈 Analytics</a>
+      <a href="#">⚙ Settings</a>
+    </nav>
+
+    <div class="status">
+      <p><span class="dot"></span> System Online</p>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <h1>Dashboard</h1>
+      <p>Upload & analyze your data in seconds</p>
+    </header>
+
+    <!-- ===================== -->
+    <!-- 🔷 MODERN ACTION GRID -->
+    <!-- ===================== -->
+    <section class="action-grid">
+
+      <!-- UPLOAD -->
+      <div class="action-card upload-card modern-upload">
+
+        <h3>📂 Upload Dataset</h3>
+
+        <label class="upload-dropzone">
+          <input type="file" id="fileInput" hidden />
+
+          <div class="upload-content">
+
+            <div class="upload-icon">
+              📁
+            </div>
+
+            <div class="upload-text">
+              <strong>Drag & Drop your CSV file</strong>
+              <span>or click to browse files</span>
+            </div>
+
+            <div class="upload-meta">
+              Only .csv files supported
+            </div>
+
+          </div>
+        </label>
+
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="action-card">
+        <h3>⚡ Actions</h3>
+
+        <div class="button-stack">
+          <button class="btn" onclick="uploadData()">⚡ Analyze Data</button>
+          <button class="btn" onclick="exportPDF()">📄 Export Report</button>
+        </div>
+      </div>
+
+      <!-- INSIGHTS -->
+      <div class="action-card insights-card">
+        <h3>📊 AI Insights</h3>
+        <pre id="output">Upload data to generate insights...</pre>
+      </div>
+
+    </section>
+
+    <!-- CHARTS -->
+    <section class="charts">
+      <div id="lineChart"></div>
+      <div id="barChart"></div>
+      <div id="pieChart"></div>
+      <div id="scatterChart"></div>
+      <div id="histogramChart"></div>
+      <div id="boxPlotChart"></div>
+      <div id="heatmapChart"></div>
+    </section>
+
+    <!-- AI CHAT -->
+    <section class="ai-chat">
+      <h3>🤖 AI Assistant</h3>
+
+      <div id="chatBox" class="chat-box"></div>
+
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Ask something..." />
+        <button onclick="askAI()">Send</button>
+      </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- 👇 MODERN FOOTER -->
+    <!-- ===================== -->
+    <footer class="footer">
+      <div class="footer-content">
+
+        <p>© 2026 Insight Pilot. All Rights Reserved.</p>
+        <p>Designed & Developed by <b>ABIJAR</b></p>
+
+        <div class="footer-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Support</a>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<!-- SCRIPT -->
+<script src="script.js" defer></script>
+
+</body>
+</html>
